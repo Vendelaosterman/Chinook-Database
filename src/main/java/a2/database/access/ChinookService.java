@@ -19,6 +19,7 @@ public class ChinookService implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception{
         chDao.testDatabaseConnection();
+        chDao.printAllCustomers();
         // TODO Auto-genrated method stub
     }
     

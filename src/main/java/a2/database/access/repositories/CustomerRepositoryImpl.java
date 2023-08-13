@@ -106,7 +106,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     // return a page of customers
-    public Collection<Customer> returnPage(int limit, int offset){
+    public Collection<Customer> returnPage(Integer limit, Integer offset){
         List<Customer> customers = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             String query = "SELECT * FROM customer LIMIT ? OFFSET ?";
@@ -132,5 +132,27 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         }
 
         return customers;
+    }
+
+    // Insert customer into customer table
+    @Override
+    public int insert(Customer customer){
+        int rowsAffected = 0; // Initialize with zero, indicating failure
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "INSERT INTO customer (first_name, last_name, country, postal_code, phone, email)" + 
+            "VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, customer.firstName);
+            preparedStatement.setString(2, customer.lastName);
+            preparedStatement.setString(3, customer.country);
+            preparedStatement.setString(4, customer.postalCode);
+            preparedStatement.setString(5, customer.phone);
+            preparedStatement.setString(6, customer.mail);
+            rowsAffected = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rowsAffected;
     }
 }

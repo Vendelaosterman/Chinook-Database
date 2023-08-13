@@ -36,6 +36,19 @@ public class ChinookService implements ApplicationRunner {
              + "Phone: " + customer.getPhone() + "\n"
              + "Email: " + customer.getEmail() + "\n");
         }
+
+        // Printing out a specific customer by id
+        Customer customer = chDao.findById(7);
+        System.out.println(
+                "Id: " + customer.getId() + "\n"
+             + "First name: " + customer.getFirstName() + "\n"
+             + "Last name: " + customer.getLastName() + "\n"
+             + "Country: " + customer.getCountry() + "\n"
+             + "Postal Code: " + customer.getPostalCode() + "\n"
+             + "Phone: " + customer.getPhone() + "\n"
+             + "Email: " + customer.getEmail() + "\n");
+
+
     }
     
 }

@@ -70,7 +70,17 @@ public class ChinookService implements ApplicationRunner {
              + "Postal Code: " + customer.getPostalCode() + "\n"
              + "Phone: " + customer.getPhone() + "\n"
              + "Email: " + customer.getEmail() + "\n");
-        }         
+        }
+        
+        // Insert customer to customer table   
+        Customer newCustomer = new Customer(0, "John", "Doe", "USA", "12345", "555-1234", "john.doe@example.com");   
+        int result = customerRepository.insert(newCustomer);
+        System.out.println(result);
+        if(result == 1){
+            System.out.print("Customer successfully inserted");
+        }else{
+            System.out.println("Customer could not be inserted");
+        }
 
     }
     

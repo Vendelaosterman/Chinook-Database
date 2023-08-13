@@ -1,13 +1,13 @@
 package a2.database.access.model;
 
 public class Customer {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private String country; 
-    private String postalCode; 
-    private String phone;
-    private String mail; 
+    public int id;
+    public String firstName;
+    public String lastName;
+    public String country; 
+    public String postalCode; 
+    public String phone;
+    public String mail; 
 
     public Customer(int id, String firstName, String lastName, String country, String postalCode, String phone, String mail ){
         this.id=id;

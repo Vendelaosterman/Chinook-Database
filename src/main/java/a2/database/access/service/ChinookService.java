@@ -59,6 +59,18 @@ public class ChinookService implements ApplicationRunner {
              + "Phone: " + customerByName.getPhone() + "\n"
              + "Email: " + customerByName.getEmail() + "\n");     
 
+        // Printing out a page of customer      
+        Collection<Customer> page = customerRepository.returnPage(20, 9);
+        for (Customer customer : page) {
+            System.out.println(
+                "Id: " + customer.getId() + "\n"
+             + "First name: " + customer.getFirstName() + "\n"
+             + "Last name: " + customer.getLastName() + "\n"
+             + "Country: " + customer.getCountry() + "\n"
+             + "Postal Code: " + customer.getPostalCode() + "\n"
+             + "Phone: " + customer.getPhone() + "\n"
+             + "Email: " + customer.getEmail() + "\n");
+        }         
 
     }
     

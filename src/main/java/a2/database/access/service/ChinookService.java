@@ -38,15 +38,26 @@ public class ChinookService implements ApplicationRunner {
         }
 
         // Printing out a specific customer by id
-        Customer customer = customerRepository.findById(7);
+        Customer customerById = customerRepository.findById(7);
         System.out.println(
-                "Id: " + customer.getId() + "\n"
-             + "First name: " + customer.getFirstName() + "\n"
-             + "Last name: " + customer.getLastName() + "\n"
-             + "Country: " + customer.getCountry() + "\n"
-             + "Postal Code: " + customer.getPostalCode() + "\n"
-             + "Phone: " + customer.getPhone() + "\n"
-             + "Email: " + customer.getEmail() + "\n");
+                "Id: " + customerById.getId() + "\n"
+             + "First name: " + customerById.getFirstName() + "\n"
+             + "Last name: " + customerById.getLastName() + "\n"
+             + "Country: " + customerById.getCountry() + "\n"
+             + "Postal Code: " + customerById.getPostalCode() + "\n"
+             + "Phone: " + customerById.getPhone() + "\n"
+             + "Email: " + customerById.getEmail() + "\n");
+
+        // Printing out a specific customer by name      
+        Customer customerByName = customerRepository.findByName("Emma");
+        System.out.println(
+                "Id: " + customerByName.getId() + "\n"
+             + "First name: " + customerByName.getFirstName() + "\n"
+             + "Last name: " + customerByName.getLastName() + "\n"
+             + "Country: " + customerByName.getCountry() + "\n"
+             + "Postal Code: " + customerByName.getPostalCode() + "\n"
+             + "Phone: " + customerByName.getPhone() + "\n"
+             + "Email: " + customerByName.getEmail() + "\n");     
 
 
     }

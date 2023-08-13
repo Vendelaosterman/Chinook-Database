@@ -8,7 +8,7 @@ import a2.database.access.model.Customer;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 
-    //Collection<Customer> findAllCustomers();
+    Customer findByName(String firstName);
 
     //additional methods 
 

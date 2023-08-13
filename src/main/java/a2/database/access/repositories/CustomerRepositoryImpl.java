@@ -78,26 +78,30 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return customer;
     }
 
-    //System.out.println("id: " + resultSet.getString(1));
-	
-	/*public List<Customer> findByFirstName(String firstName) {
-        ArrayList<Customer> customerList = new Arraylist<>();
-        try(Connection connection = DriverManager.getConnection(url, username, password);
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM customer WHERE first_name= ?")){
-            statement.setString(1, firstName);
+    // Find customer by specific name 
+    public Customer findByName(String firstName){
+        Customer customer = null;
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "SELECT * FROM customer WHERE first_name = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, firstName);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
-                Customer customer = new Customer(
+            if (resultSet.next()) {
+                customer = new Customer(
                     resultSet.getInt(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
-                    resultSet.getString(8)
-                )
+                    resultSet.getString(8),
+                    resultSet.getString(9),
+                    resultSet.getString(10),
+                    resultSet.getString(12)
+                );
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-		// Implement
-	}*/
-	
-	// Additional methods as per the interfaces to implement
+
+        return customer;
+    }
 }

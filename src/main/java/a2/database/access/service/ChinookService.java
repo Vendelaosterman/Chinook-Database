@@ -22,7 +22,9 @@ public class ChinookService implements ApplicationRunner {
     
     @Override
     public void run(ApplicationArguments args) throws Exception{
-         Collection<Customer> customers = chDao.findAllCustomers();
+
+        // Printing out all the customers from customer table
+        Collection<Customer> customers = chDao.findAllCustomers();
         
         for (Customer customer : customers) {
             System.out.println(

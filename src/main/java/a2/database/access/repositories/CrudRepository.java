@@ -6,8 +6,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CrudRepository <T, ID>{
-    Collection<T> findAll();
+
+    Collection<T> findAllCustomers();
+
     T findById(ID id);
 
-    //additional methods 
+   // T add(T entity);
+
+    //T update(T entity);
+
+    //void deleteById(ID id);
 }

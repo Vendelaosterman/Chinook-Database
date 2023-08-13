@@ -24,6 +24,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Value("${spring.datasource.password}")
     private String password;
 
+    // Find all customers from customer table 
     public Collection<Customer> findAllCustomers(){
         List<Customer> customers = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
@@ -48,6 +49,33 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         }
 
         return customers;
+    }
+
+    // Find customer by specific id
+    public Customer findById(Integer id){
+        Customer customer = null;
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "SELECT * FROM customer WHERE customer_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                customer = new Customer(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(8),
+                    resultSet.getString(9),
+                    resultSet.getString(10),
+                    resultSet.getString(12)
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return customer;
     }
 
     //System.out.println("id: " + resultSet.getString(1));

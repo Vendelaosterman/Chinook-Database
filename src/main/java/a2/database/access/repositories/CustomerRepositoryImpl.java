@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import a2.database.access.model.Customer;
+import a2.database.access.model.CustomerCountry;
+import a2.database.access.model.CustomerSpender;
 
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository {
@@ -154,5 +156,25 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         }
 
         return rowsAffected;
+    }
+
+    @Override
+    public CustomerCountry findCommonCountry(){
+         CustomerCountry country = null;
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "SELECT country FROM customer GROUP BY country ORDER BY COUNT(*) DESC LIMIT 1";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                country = new CustomerCountry(
+                    resultSet.getString(1)
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return country;
     }
 }

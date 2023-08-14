@@ -10,6 +10,5 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 
     Customer findByName(String firstName);
 
-    //additional methods 
-
+    Collection<Customer> returnPage(Integer limit, Integer offset);
 }

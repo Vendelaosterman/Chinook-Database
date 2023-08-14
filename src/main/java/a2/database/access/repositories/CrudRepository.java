@@ -11,7 +11,7 @@ public interface CrudRepository <T, ID>{
 
     T findById(ID id);
 
-   // T add(T entity);
+    int insert(T object);
 
     //T update(T entity);
 

@@ -27,8 +27,27 @@ public class ChinookService implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception{
 
-        // Printing out all the customers from customer table
-        Collection<Customer> customers = customerRepository.findAllCustomers();
+        //printAll();
+
+        //printById();
+
+        //printByName();
+
+        //printPage();
+
+        //insertCustomer();
+
+        //printCommonCountry();
+
+        //printHighestSpender();
+
+        printPopularGenre();
+
+    }
+
+    // Printing out all the customers from customer table
+    public void printAll(){
+         Collection<Customer> customers = customerRepository.findAllCustomers();
         
         for (Customer customer : customers) {
             System.out.println(
@@ -40,9 +59,11 @@ public class ChinookService implements ApplicationRunner {
              + "Phone: " + customer.getPhone() + "\n"
              + "Email: " + customer.getEmail() + "\n");
         }
+    }
 
-        // Printing out a specific customer by id
-        Customer customerById = customerRepository.findById(7);
+     // Printing out a specific customer by id
+    public void  printById(){
+         Customer customerById = customerRepository.findById(7);
         System.out.println(
                 "Id: " + customerById.getId() + "\n"
              + "First name: " + customerById.getFirstName() + "\n"
@@ -51,8 +72,10 @@ public class ChinookService implements ApplicationRunner {
              + "Postal Code: " + customerById.getPostalCode() + "\n"
              + "Phone: " + customerById.getPhone() + "\n"
              + "Email: " + customerById.getEmail() + "\n");
+    }
 
-        // Printing out a specific customer by name      
+     // Printing out a specific customer by name      
+     public void printByName(){
         Customer customerByName = customerRepository.findByName("Emma");
         System.out.println(
                 "Id: " + customerByName.getId() + "\n"
@@ -61,9 +84,11 @@ public class ChinookService implements ApplicationRunner {
              + "Country: " + customerByName.getCountry() + "\n"
              + "Postal Code: " + customerByName.getPostalCode() + "\n"
              + "Phone: " + customerByName.getPhone() + "\n"
-             + "Email: " + customerByName.getEmail() + "\n");     
-
-        // Printing out a page of customer      
+             + "Email: " + customerByName.getEmail() + "\n");    
+    }
+    
+    // Printing out a page of customer 
+    public void printPage(){
         Collection<Customer> page = customerRepository.returnPage(20, 9);
         for (Customer customer : page) {
             System.out.println(
@@ -75,8 +100,10 @@ public class ChinookService implements ApplicationRunner {
              + "Phone: " + customer.getPhone() + "\n"
              + "Email: " + customer.getEmail() + "\n");
         }
-        
-        // Insert customer to customer table   
+    }     
+
+    // Insert customer to customer table   
+    public void insertCustomer(){
         Customer newCustomer = new Customer(0, "John", "Doe", "USA", "12345", "555-1234", "john.doe@example.com");   
         int result = customerRepository.insert(newCustomer);
         System.out.println(result);
@@ -85,26 +112,31 @@ public class ChinookService implements ApplicationRunner {
         }else{
             System.out.println("Customer could not be inserted" + "\n");
         }
+    }
 
-        // Find most common Country 
+    // Find most common Country 
+    public void printCommonCountry(){
         CustomerCountry country = customerRepository.findCommonCountry();
-        System.out.println("Most common country: " + country.getCountry());  
-        
-        // Find the highest spender on invoice 
+        System.out.println("\n" + "Most common country: " + country.getCountry());  
+    }
+
+     // Find the highest spender on invoice 
+    public void printHighestSpender(){
         CustomerSpender highestSpender = customerRepository.findHighestSpender();
         System.out.println("Highest spender: " + "\n"
         + "Customer id: " + highestSpender.getId() + "\n"
         + "First name: " + highestSpender.getFirstName() + "\n"
         + "Last name: " + highestSpender.getLastName() + "\n"
         + "Total spent: " + highestSpender.getTotalSpent());
+    } 
 
-        // Printing out most popular genre for given customer id 
-        CustomerGenre popularGenre = customerRepository.findPopularGenre(45);
+    // Printing out most popular genre for given customer id 
+    public void printPopularGenre(){
+         CustomerGenre popularGenre = customerRepository.findPopularGenre(45);
         System.out.println("Popular genre for customer_id: " + popularGenre.getCustomerId() + "\n"
         + "Genre ID: " + popularGenre.getGenreId() + "\n"
         + "Genre name: " + popularGenre.getGenreName() + "\n"
         + "Genre count: " + popularGenre.getGenreCount());
-
     }
     
 }

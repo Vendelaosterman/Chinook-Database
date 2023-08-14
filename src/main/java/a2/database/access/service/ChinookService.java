@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import a2.database.access.model.Customer;
 import a2.database.access.repositories.CustomerRepository;
+import a2.database.access.model.CustomerCountry;
+import a2.database.access.model.CustomerSpender;
 
 @Service
 public class ChinookService implements ApplicationRunner {

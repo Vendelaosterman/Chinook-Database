@@ -82,6 +82,18 @@ public class ChinookService implements ApplicationRunner {
             System.out.println("Customer could not be inserted");
         }
 
+        // Find most common Country 
+        CustomerCountry country = customerRepository.findCommonCountry();
+        System.out.println("Most common country: " + country.getCountry());  
+        
+        // Find the highest spender on invoice 
+        CustomerSpender highestSpender = customerRepository.findHighestSpender();
+        System.out.println("Highest spender: " + "\n"
+        + "Customer id: " + highestSpender.getId() + "\n"
+        + "First name: " + highestSpender.getFirstName() + "\n"
+        + "Last name: " + highestSpender.getLastName() + "\n"
+        + "Total spent: " + highestSpender.getTotalSpent());
+
     }
     
 }

@@ -14,7 +14,9 @@ import org.springframework.stereotype.Repository;
 
 import a2.database.access.model.Customer;
 import a2.database.access.model.CustomerCountry;
+import a2.database.access.model.CustomerGenre;
 import a2.database.access.model.CustomerSpender;
+import a2.database.access.model.CustomerGenre;
 
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository {
@@ -204,5 +206,40 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         }
 
         return highestSpender;
+    }
+
+    @Override 
+    public CustomerGenre findPopularGenre(Integer id){
+        CustomerGenre popularGenre = null;
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "SELECT c.customer_id, g.genre_id, g.name, COUNT(*) AS genre_count \r\n" + //
+            "FROM customer c\r\n" + //
+            "JOIN invoice i ON c.customer_id = i.customer_id\r\n" + //
+            "JOIN invoice_line il ON i.invoice_id = il.invoice_id\r\n" + //
+            "JOIN track t ON il.track_id = t.track_id\r\n" + //
+            "JOIN genre g ON t.genre_id = g.genre_id\r\n" + //
+            "WHERE c.customer_id = ? \r\n" + //
+            "GROUP BY c.customer_id, g.genre_id, g.name\r\n" + //
+            "ORDER BY genre_count DESC\r\n" + //
+            "LIMIT 1;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                popularGenre = new CustomerGenre(
+                    resultSet.getInt(1),
+                    resultSet.getInt(2),
+                    resultSet.getString(3),
+                    resultSet.getInt(4)
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return popularGenre;
+
     }
 }

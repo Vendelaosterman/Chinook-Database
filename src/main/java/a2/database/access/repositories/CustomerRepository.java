@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import a2.database.access.model.Customer;
 import a2.database.access.model.CustomerCountry;
 import a2.database.access.model.CustomerSpender;
+import a2.database.access.model.CustomerGenre;
 
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Integer> {
@@ -17,4 +18,6 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer> {
     CustomerCountry findCommonCountry();
 
     CustomerSpender findHighestSpender();
+
+    CustomerGenre findPopularGenre(Integer id);
 }

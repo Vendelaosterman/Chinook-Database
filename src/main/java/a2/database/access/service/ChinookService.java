@@ -11,6 +11,8 @@ import a2.database.access.model.Customer;
 import a2.database.access.repositories.CustomerRepository;
 import a2.database.access.model.CustomerCountry;
 import a2.database.access.model.CustomerSpender;
+import a2.database.access.model.CustomerGenre;
+
 
 @Service
 public class ChinookService implements ApplicationRunner {
@@ -95,6 +97,13 @@ public class ChinookService implements ApplicationRunner {
         + "First name: " + highestSpender.getFirstName() + "\n"
         + "Last name: " + highestSpender.getLastName() + "\n"
         + "Total spent: " + highestSpender.getTotalSpent());
+
+        // Printing out most popular genre for given customer id 
+        CustomerGenre popularGenre = customerRepository.findPopularGenre(45);
+        System.out.println("Popular genre for customer_id: " + popularGenre.getCustomerId() + "\n"
+        + "Genre ID: " + popularGenre.getGenreId() + "\n"
+        + "Genre name: " + popularGenre.getGenreName() + "\n"
+        + "Genre count: " + popularGenre.getGenreCount());
 
     }
     

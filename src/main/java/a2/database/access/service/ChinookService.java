@@ -81,9 +81,9 @@ public class ChinookService implements ApplicationRunner {
         int result = customerRepository.insert(newCustomer);
         System.out.println(result);
         if(result == 1){
-            System.out.print("Customer successfully inserted");
+            System.out.print("Customer successfully inserted" + "\n");
         }else{
-            System.out.println("Customer could not be inserted");
+            System.out.println("Customer could not be inserted" + "\n");
         }
 
         // Find most common Country 

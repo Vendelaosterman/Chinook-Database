@@ -177,4 +177,32 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
         return country;
     }
+
+    @Override
+    public CustomerSpender findHighestSpender(){
+        CustomerSpender highestSpender = null;
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "SELECT customer.customer_id, customer.first_name , customer.last_name, SUM(invoice.total) AS total_spent\r\n" + //
+                    "FROM customer\r\n" + //
+                    "JOIN invoice ON customer.customer_id = invoice.customer_id\r\n" + //
+                    "GROUP BY customer.customer_id, customer.first_name, customer.last_name\r\n" + //
+                    "ORDER BY total_spent DESC\r\n" + //
+                    "LIMIT 1;";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                highestSpender = new CustomerSpender(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getDouble(4)
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return highestSpender;
+    }
 }

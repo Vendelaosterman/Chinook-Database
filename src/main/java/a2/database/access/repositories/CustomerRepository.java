@@ -19,5 +19,5 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 
     CustomerSpender findHighestSpender();
 
-    CustomerGenre findPopularGenre(Integer id);
+    Collection<CustomerGenre> findPopularGenre(Integer id);
 }

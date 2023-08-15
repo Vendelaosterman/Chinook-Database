@@ -209,37 +209,42 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override 
-    public CustomerGenre findPopularGenre(Integer id){
-        CustomerGenre popularGenre = null;
+    public Collection<CustomerGenre> findPopularGenre(Integer id){
+        List<CustomerGenre> popularGenres = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT c.customer_id, g.genre_id, g.name, COUNT(*) AS genre_count \r\n" + //
-            "FROM customer c\r\n" + //
-            "JOIN invoice i ON c.customer_id = i.customer_id\r\n" + //
-            "JOIN invoice_line il ON i.invoice_id = il.invoice_id\r\n" + //
-            "JOIN track t ON il.track_id = t.track_id\r\n" + //
-            "JOIN genre g ON t.genre_id = g.genre_id\r\n" + //
-            "WHERE c.customer_id = ? \r\n" + //
-            "GROUP BY c.customer_id, g.genre_id, g.name\r\n" + //
-            "ORDER BY genre_count DESC\r\n" + //
-            "LIMIT 1;";
+            String query = "WITH GenreCounts AS (\r\n" + //
+                "SELECT c.customer_id, g.genre_id, g.name, COUNT(*) AS genre_count,\r\n" + //
+                       "MAX(COUNT(*)) OVER() AS max_genre_count\r\n" + //
+                "FROM customer c \r\n" + //
+                "JOIN invoice i ON c.customer_id = i.customer_id\r\n" + //
+                "JOIN invoice_line il ON i.invoice_id = il.invoice_id\r\n" + //
+                "JOIN track t ON il.track_id = t.track_id\r\n" + //
+                "JOIN genre g ON t.genre_id = g.genre_id\r\n" + //
+                "WHERE c.customer_id = ? \r\n" + //
+                "GROUP BY c.customer_id, g.genre_id, g.name)\r\n" + //
+            "SELECT customer_id, genre_id, name, genre_count\r\n" + //
+            "FROM GenreCounts \r\n" + //
+            "WHERE genre_count = max_genre_count \r\n" + //
+            "ORDER BY genre_count DESC;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                popularGenre = new CustomerGenre(
+            while (resultSet.next()) {
+                CustomerGenre popularGenre = new CustomerGenre(
                     resultSet.getInt(1),
                     resultSet.getInt(2),
                     resultSet.getString(3),
                     resultSet.getInt(4)
                 );
+                popularGenres.add(popularGenre);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return popularGenre;
+        return popularGenres;
 
     }
 }

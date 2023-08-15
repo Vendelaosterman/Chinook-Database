@@ -104,9 +104,16 @@ public class ChinookService implements ApplicationRunner {
 
     // Insert customer to customer table   
     public void insertCustomer(){
-        Customer newCustomer = new Customer(0, "John", "Doe", "USA", "12345", "555-1234", "john.doe@example.com");   
+        Customer newCustomer = new Customer(
+            0, 
+            "John", 
+            "Doe", 
+            "USA", 
+            "12345", 
+            "555-1234", 
+            "john.doe@example.com");   
         int result = customerRepository.insert(newCustomer);
-        System.out.println(result);
+
         if(result == 1){
             System.out.print("Customer successfully inserted" + "\n");
         }else{

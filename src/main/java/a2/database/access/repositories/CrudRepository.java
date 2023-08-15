@@ -12,8 +12,4 @@ public interface CrudRepository <T, ID>{
     T findById(ID id);
 
     int insert(T object);
-
-    //T update(T entity);
-
-    //void deleteById(ID id);
 }

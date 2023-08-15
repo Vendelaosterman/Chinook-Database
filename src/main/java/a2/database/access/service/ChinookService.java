@@ -139,11 +139,14 @@ public class ChinookService implements ApplicationRunner {
 
     // Printing out most popular genre for given customer id 
     public void printPopularGenre(){
-         CustomerGenre popularGenre = customerRepository.findPopularGenre(45);
-        System.out.println("Popular genre for customer_id: " + popularGenre.getCustomerId() + "\n"
-        + "Genre ID: " + popularGenre.getGenreId() + "\n"
-        + "Genre name: " + popularGenre.getGenreName() + "\n"
-        + "Genre count: " + popularGenre.getGenreCount());
+        Collection<CustomerGenre> genres = customerRepository.findPopularGenre(12);
+         
+        System.out.println("Popular genres for specific customer:");
+        for (CustomerGenre genre : genres) {
+            System.out.println("Genre ID: " + genre.getGenreId() + "\n"
+        + "Genre name: " + genre.getGenreName() + "\n"
+        + "Genre count: " + genre.getGenreCount() + "\n");
+        }
     }
     
 }

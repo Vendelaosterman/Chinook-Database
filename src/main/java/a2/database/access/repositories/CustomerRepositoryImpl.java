@@ -16,7 +16,6 @@ import a2.database.access.model.Customer;
 import a2.database.access.model.CustomerCountry;
 import a2.database.access.model.CustomerGenre;
 import a2.database.access.model.CustomerSpender;
-import a2.database.access.model.CustomerGenre;
 
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository {
@@ -29,7 +28,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private String password;
 
     // Find all customers from customer table 
-    public Collection<Customer> findAllCustomers(){
+    @Override
+    public Collection<Customer> findAll(){
         List<Customer> customers = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             String query = "SELECT * FROM customer";
@@ -56,6 +56,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     // Find customer by specific id
+    @Override
     public Customer findById(Integer id){
         Customer customer = null;
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
@@ -83,6 +84,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     // Find customer by specific name 
+    @Override
     public Customer findByName(String firstName){
         Customer customer = null;
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
@@ -110,6 +112,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     // return a page of customers
+    @Override
     public Collection<Customer> returnPage(Integer limit, Integer offset){
         List<Customer> customers = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
@@ -160,6 +163,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return rowsAffected;
     }
 
+    // Find the most common country of customers 
     @Override
     public CustomerCountry findCommonCountry(){
          CustomerCountry country = null;
@@ -180,6 +184,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return country;
     }
 
+    // Find the customer who is the highest spender 
     @Override
     public CustomerSpender findHighestSpender(){
         CustomerSpender highestSpender = null;
@@ -208,6 +213,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return highestSpender;
     }
 
+    // find the most popular genre/genres of a customer 
     @Override 
     public Collection<CustomerGenre> findPopularGenre(Integer id){
         List<CustomerGenre> popularGenres = new ArrayList<>();

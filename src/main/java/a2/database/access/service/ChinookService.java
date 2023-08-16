@@ -13,7 +13,8 @@ import a2.database.access.model.CustomerCountry;
 import a2.database.access.model.CustomerSpender;
 import a2.database.access.model.CustomerGenre;
 
-
+// Service class that implements the ApplicationRunner interface. 
+// This class contains methods to perform various operations using the CustomerRepository.
 @Service
 public class ChinookService implements ApplicationRunner {
 
@@ -27,19 +28,19 @@ public class ChinookService implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception{
 
-        //printAll();
+        printAll();
 
-        //printById();
+        printById();
 
-        //printByName();
+        printByName();
 
-        //printPage();
+        printPage();
 
-        //insertCustomer();
+        insertCustomer();
 
-        //printCommonCountry();
+        printCommonCountry();
 
-        //printHighestSpender();
+        printHighestSpender();
 
         printPopularGenre();
 
@@ -47,7 +48,7 @@ public class ChinookService implements ApplicationRunner {
 
     // Printing out all the customers from customer table
     public void printAll(){
-         Collection<Customer> customers = customerRepository.findAllCustomers();
+         Collection<Customer> customers = customerRepository.findAll();
         
         for (Customer customer : customers) {
             System.out.println(

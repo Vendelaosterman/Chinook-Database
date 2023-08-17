@@ -29,7 +29,7 @@ This is a Java application that provides access to the Chinook database, allowin
 - `a2/database/access`: The main package for the application.
  - `models`: Contains the model classes for each data structure.
  - `repositories`: Contains the repository interfaces and their implementations.
- - `services`: Contains the service classes that interact with repositories.
+ - `service`: Contains the service class that interact with repositories.
 - `resources`: Contains configuration files, such as `application.properties`.
 
 ## Dependencies

@@ -40,4 +40,5 @@ This is a Java application that provides access to the Chinook database, allowin
 
 ## Authors
 
-@VendelaOsterman
+@VendelaOsterman / Vendela Österman
+@ninita11 / Karina Esbjörsson

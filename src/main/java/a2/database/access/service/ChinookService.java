@@ -13,8 +13,9 @@ import a2.database.access.model.CustomerCountry;
 import a2.database.access.model.CustomerSpender;
 import a2.database.access.model.CustomerGenre;
 
-// Service class that implements the ApplicationRunner interface. 
-// This class contains methods to perform various operations using the CustomerRepository.
+/**
+ * Service class that implements the ApplicationRunner interface to perform various data access operations.
+ */
 @Service
 public class ChinookService implements ApplicationRunner {
 
@@ -46,7 +47,9 @@ public class ChinookService implements ApplicationRunner {
 
     }
 
-    // Printing out all the customers from customer table
+    /**
+     * Prints out all customers from the customer table.
+     */
     public void printAll(){
          Collection<Customer> customers = customerRepository.findAll();
         
@@ -62,7 +65,9 @@ public class ChinookService implements ApplicationRunner {
         }
     }
 
-     // Printing out a specific customer by id
+    /**
+     * Prints out a specific customer by their ID.
+     */
     public void  printById(){
          Customer customerById = customerRepository.findById(7);
         System.out.println(
@@ -75,7 +80,9 @@ public class ChinookService implements ApplicationRunner {
              + "Email: " + customerById.getEmail() + "\n");
     }
 
-     // Printing out a specific customer by name      
+      /**
+     * Prints out a specific customer by their name.
+     */      
      public void printByName(){
         Customer customerByName = customerRepository.findByName("Emma");
         System.out.println(
@@ -88,7 +95,9 @@ public class ChinookService implements ApplicationRunner {
              + "Email: " + customerByName.getEmail() + "\n");    
     }
     
-    // Printing out a page of customer 
+    /**
+     * Prints out a page of customers from the customer table.
+     */ 
     public void printPage(){
         Collection<Customer> page = customerRepository.returnPage(20, 9);
         for (Customer customer : page) {
@@ -103,7 +112,9 @@ public class ChinookService implements ApplicationRunner {
         }
     }     
 
-    // Insert customer to customer table   
+        /**
+     * Inserts a new customer into the customer table.
+     */   
     public void insertCustomer(){
         Customer newCustomer = new Customer(
             0, 
@@ -122,13 +133,17 @@ public class ChinookService implements ApplicationRunner {
         }
     }
 
-    // Find most common Country 
+    /**
+     * Prints the most common country among customers.
+     */
     public void printCommonCountry(){
         CustomerCountry country = customerRepository.findCommonCountry();
         System.out.println("\n" + "Most common country: " + country.getCountry());  
     }
 
-     // Find the highest spender on invoice 
+    /**
+     * Prints the customer who is the highest spender.
+     */ 
     public void printHighestSpender(){
         CustomerSpender highestSpender = customerRepository.findHighestSpender();
         System.out.println("Highest spender: " + "\n"
@@ -138,7 +153,9 @@ public class ChinookService implements ApplicationRunner {
         + "Total spent: " + highestSpender.getTotalSpent());
     } 
 
-    // Printing out most popular genre for given customer id 
+    /**
+     * Prints out the most popular genre(s) for a given customer ID.
+     */ 
     public void printPopularGenre(){
         Collection<CustomerGenre> genres = customerRepository.findPopularGenre(12);
          

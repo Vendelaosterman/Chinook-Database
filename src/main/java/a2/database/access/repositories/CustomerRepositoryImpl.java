@@ -17,6 +17,7 @@ import a2.database.access.model.CustomerCountry;
 import a2.database.access.model.CustomerGenre;
 import a2.database.access.model.CustomerSpender;
 
+// Repository implementing CustomerRepository
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository {
 

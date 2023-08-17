@@ -8,6 +8,7 @@ import a2.database.access.model.CustomerCountry;
 import a2.database.access.model.CustomerSpender;
 import a2.database.access.model.CustomerGenre;
 
+// Interface that extends the CrudRepository
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 

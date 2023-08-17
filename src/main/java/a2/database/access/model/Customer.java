@@ -1,5 +1,7 @@
 package a2.database.access.model;
 
+//Model that defines the properties of Customer 
+
 public class Customer {
     public int id;
     public String firstName;

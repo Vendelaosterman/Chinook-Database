@@ -1,5 +1,6 @@
 package a2.database.access.model;
 
+//Model that defines the properties of CustomerGenre
 public class CustomerGenre {
     private int customerId;
     private int genreId;

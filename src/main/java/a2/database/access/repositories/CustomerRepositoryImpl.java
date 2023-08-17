@@ -28,7 +28,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Value("${spring.datasource.password}")
     private String password;
 
-    // Find all customers from customer table 
+     /**
+     * Retrieves all customers from the customer table.
+     *
+     * @return A collection of Customer objects representing all customers.
+     */ 
     @Override
     public Collection<Customer> findAll(){
         List<Customer> customers = new ArrayList<>();
@@ -56,7 +60,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return customers;
     }
 
-    // Find customer by specific id
+        /**
+     * Retrieves a customer by their specific ID.
+     *
+     * @param id The unique identifier of the customer.
+     * @return A Customer object representing the customer with the given ID, or null if not found.
+     */
     @Override
     public Customer findById(Integer id){
         Customer customer = null;
@@ -84,7 +93,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return customer;
     }
 
-    // Find customer by specific name 
+        /**
+     * Retrieves a customer by their specific first name.
+     *
+     * @param firstName The first name of the customer.
+     * @return A Customer object representing the customer with the given first name, or null if not found.
+     */
     @Override
     public Customer findByName(String firstName){
         Customer customer = null;
@@ -112,7 +126,13 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return customer;
     }
 
-    // return a page of customers
+        /**
+     * Retrieves a page of customers with the specified limit and offset.
+     *
+     * @param limit  The maximum number of customers to retrieve.
+     * @param offset The starting index of customers to retrieve.
+     * @return A collection of Customer objects representing the retrieved customers.
+     */
     @Override
     public Collection<Customer> returnPage(Integer limit, Integer offset){
         List<Customer> customers = new ArrayList<>();
@@ -142,7 +162,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return customers;
     }
 
-    // Insert customer into customer table
+        /**
+     * Inserts a new customer into the customer table.
+     *
+     * @param customer The Customer object containing information about the customer to be inserted.
+     * @return The number of rows affected in the database (1 if successful, 0 if failed).
+     */
     @Override
     public int insert(Customer customer){
         int rowsAffected = 0; // Initialize with zero, indicating failure
@@ -164,7 +189,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return rowsAffected;
     }
 
-    // Find the most common country of customers 
+    /**
+     * Retrieves the most common country among customers.
+     *
+     * @return A CustomerCountry object representing the most common country among customers.
+     */
     @Override
     public CustomerCountry findCommonCountry(){
          CustomerCountry country = null;
@@ -185,7 +214,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return country;
     }
 
-    // Find the customer who is the highest spender 
+        /**
+     * Retrieves the customer who is the highest spender.
+     *
+     * @return A CustomerSpender object representing the highest spender customer.
+     */ 
     @Override
     public CustomerSpender findHighestSpender(){
         CustomerSpender highestSpender = null;
@@ -214,7 +247,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return highestSpender;
     }
 
-    // find the most popular genre/genres of a customer 
+        /**
+     * Retrieves the most popular genre(s) of a specific customer.
+     *
+     * @param id The unique identifier of the customer.
+     * @return A collection of CustomerGenre objects representing the most popular genre(s) of the customer.
+     */
     @Override 
     public Collection<CustomerGenre> findPopularGenre(Integer id){
         List<CustomerGenre> popularGenres = new ArrayList<>();
